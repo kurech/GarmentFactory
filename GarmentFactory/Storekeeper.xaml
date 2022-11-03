@@ -1,0 +1,30 @@
+﻿<Window x:Class="GarmentFactory.Storekeeper"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GarmentFactory"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Экран кладовщика" Height="500" Width="900" MinHeight="350" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Grid>
+        <DockPanel LastChildFill="False">
+            <Menu DockPanel.Dock="Top" Background="White" FontSize="16" FontWeight="SemiBold" BorderBrush="Black" BorderThickness="1">
+                <MenuItem Header="_Список тканей" Margin="10 5" x:Name="menuFabricList" Click="menuFabricList_Click"></MenuItem>
+                <MenuItem Header="_Список фурнитуры" Margin="10 5" x:Name="menuFurnitureList" Click="menuFurnitureList_Click"></MenuItem>
+                <MenuItem Header="_Выйти" Margin="10 5" x:Name="menuOut" Click="menuOut_Click"></MenuItem>
+            </Menu>
+
+            <DockPanel x:Name="dpFabricsList" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="True">
+                <DataGrid DockPanel.Dock="Top" x:Name="fabricGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Height="380" Margin="0 20 0 0">
+                    
+                </DataGrid>
+            </DockPanel>
+
+            <DockPanel x:Name="dpFurnitureList" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -400 0 0">
+                <DataGrid DockPanel.Dock="Top" x:Name="furnitureGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Height="380" Margin="0 20 0 0">
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</Window>

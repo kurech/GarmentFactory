@@ -1,0 +1,74 @@
+﻿<Window x:Class="GarmentFactory.Manager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GarmentFactory"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Экран менеджера" Height="480" Width="900" MinHeight="480" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing">
+    <Grid>
+        <DockPanel LastChildFill="False">
+            <Menu DockPanel.Dock="Top" Background="White" FontSize="16" FontWeight="SemiBold" BorderBrush="Black" BorderThickness="1">
+                <MenuItem Header="_Список заказов" Margin="10 5" x:Name="menuOrderList" Click="menuOrderList_Click"></MenuItem>
+                <MenuItem Header="_Оформление заказа" Margin="10 5" x:Name="menuMakeOrder" Click="menuMakeOrder_Click"></MenuItem>
+                <MenuItem Header="_Выйти" Margin="10 5" x:Name="menuOut" Click="menuOut_Click"></MenuItem>
+            </Menu>
+
+            <DockPanel x:Name="dpOrderList" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="True">
+                <DataGrid DockPanel.Dock="Top" x:Name="phonesGrid" AutoGenerateColumns="False" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Margin="0 20 0 0">
+                    <DataGrid.Items>
+                        <Label>ываыва</Label>
+                        <Label>ываыва</Label>
+                        <Label>ываыва</Label>
+                        <Label>ываыва</Label>
+                        <Label>ываыва</Label>
+                        <Label>ываыва</Label>
+                        <Label>ываыва</Label>
+                        <Label>ываыва</Label>
+                    </DataGrid.Items>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Width="50" />
+                        <DataGridTextColumn Header="Дата" Width="132" />
+                        <DataGridTextColumn Header="Кол-во изделий" Width="130" />
+                        <DataGridTextColumn Header="Этап выполнения" Width="180" />
+                        <DataGridTextColumn Header="Заказчик" Width="150" />
+                        <DataGridTextColumn Header="Менеджер" Width="150" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button DockPanel.Dock="Bottom" x:Name="btnUpdateOrderList" Style="{StaticResource ResourceKey=redButton}" Click="btnUpdateOrderList_Click" Width="150" Height="50" Content="Обновить" Margin="0 20 0 0"></Button>
+            </DockPanel>
+
+            <DockPanel x:Name="dpMakeOrder" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -205 0 0">
+                <StackPanel x:Name="firstProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 40 0 0" HorizontalAlignment="Center">
+                    <ComboBox x:Name="cmbProduct1" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                        <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                    </ComboBox>
+                    <TextBox x:Name="txtCount1" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0" PreviewMouseDown="txtCount1_PreviewMouseDown">Количество</TextBox>
+                    <TextBox x:Name="txtCost1" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                </StackPanel>
+                <StackPanel x:Name="secondProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                    <ComboBox x:Name="cmbProduct2" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                        <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                    </ComboBox>
+                    <TextBox x:Name="txtCount2" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0">Количество</TextBox>
+                    <TextBox x:Name="txtCost2" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                </StackPanel>
+                <StackPanel x:Name="thirdProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                    <ComboBox x:Name="cmbProduct3" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                        <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                    </ComboBox>
+                    <TextBox x:Name="txtCount3" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0">Количество</TextBox>
+                    <TextBox x:Name="txtCost3" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                </StackPanel>
+                <Label DockPanel.Dock="Top" x:Name="lblAddProduct" PreviewMouseDown="lblAddProduct_PreviewMouseDown" FontSize="36" Margin="20 -140" Width="35" HorizontalAlignment="Center">+</Label>
+                <Label DockPanel.Dock="Top" x:Name="line" FontSize="36" Margin="20 0 20 0" HorizontalAlignment="Center">________________________________________________________________________________________________________</Label>
+                <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <Label DockPanel.Dock="Right" FontSize="16" FontWeight="Bold" FontStyle="Italic">Итоговая стоимость:</Label>
+                    <Label DockPanel.Dock="Right" x:Name="totalCost" FontSize="16" FontWeight="Bold" FontStyle="Italic" Margin="30 0 0 0" Content="0 ₽"></Label>
+                </StackPanel>
+                <Button DockPanel.Dock="Top" x:Name="btnMakeOrder" Style="{StaticResource ResourceKey=redButton}" Click="btnMakeOrder_Click" Width="150" Height="50" Content="Оформить" Margin="20"></Button>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</Window>
