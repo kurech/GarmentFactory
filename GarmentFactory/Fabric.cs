@@ -19,6 +19,7 @@ namespace GarmentFactory
         {
             this.FabricColors = new HashSet<FabricColor>();
             this.FabricStructures = new HashSet<FabricStructure>();
+            this.WarehouseFabric = new HashSet<WarehouseFabric>();
             this.Products = new HashSet<Product>();
         }
     
@@ -34,7 +35,8 @@ namespace GarmentFactory
         public virtual ICollection<FabricColor> FabricColors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FabricStructure> FabricStructures { get; set; }
-        public virtual WarehouseFabric WarehouseFabric { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WarehouseFabric> WarehouseFabric { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }

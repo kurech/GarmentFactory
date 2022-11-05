@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GarmentFactory"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Экран менеджера" Height="480" Width="900" MinHeight="480" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing">
+        Title="Экран менеджера" Height="530" Width="900" MinHeight="530" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <DockPanel LastChildFill="False">
             <Menu DockPanel.Dock="Top" Background="White" FontSize="16" FontWeight="SemiBold" BorderBrush="Black" BorderThickness="1">
@@ -15,31 +15,14 @@
                 <MenuItem Header="_Выйти" Margin="10 5" x:Name="menuOut" Click="menuOut_Click"></MenuItem>
             </Menu>
 
-            <DockPanel x:Name="dpOrderList" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="True">
-                <DataGrid DockPanel.Dock="Top" x:Name="phonesGrid" AutoGenerateColumns="False" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Margin="0 20 0 0">
-                    <DataGrid.Items>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                    </DataGrid.Items>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="№" Width="50" />
-                        <DataGridTextColumn Header="Дата" Width="132" />
-                        <DataGridTextColumn Header="Кол-во изделий" Width="130" />
-                        <DataGridTextColumn Header="Этап выполнения" Width="180" />
-                        <DataGridTextColumn Header="Заказчик" Width="150" />
-                        <DataGridTextColumn Header="Менеджер" Width="150" />
-                    </DataGrid.Columns>
+            <DockPanel x:Name="dpOrderList" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="True">
+                <DataGrid DockPanel.Dock="Top" x:Name="phonesGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFD1EEFC" AlternatingRowBackground="#FFFFFCD6" FontSize="16" FontWeight="SemiBold" Width="800" Height="350" Margin="0 20 0 0">
+                    
                 </DataGrid>
                 <Button DockPanel.Dock="Bottom" x:Name="btnUpdateOrderList" Style="{StaticResource ResourceKey=redButton}" Click="btnUpdateOrderList_Click" Width="150" Height="50" Content="Обновить" Margin="0 20 0 0"></Button>
             </DockPanel>
 
-            <DockPanel x:Name="dpMakeOrder" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -205 0 0">
+            <DockPanel x:Name="dpMakeOrder" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="True" Margin="0 -440 0 0">
                 <StackPanel x:Name="firstProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 40 0 0" HorizontalAlignment="Center">
                     <ComboBox x:Name="cmbProduct1" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
                         <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>

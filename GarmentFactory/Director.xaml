@@ -6,56 +6,52 @@
         xmlns:local="clr-namespace:GarmentFactory"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Экран директора" Height="350" Width="900" MinHeight="350" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing">
+        Title="Экран директора" Height="420" Width="900" MinHeight="420" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <DockPanel LastChildFill="False">
-            <Menu DockPanel.Dock="Top" Background="White" FontSize="16" FontWeight="SemiBold" BorderBrush="Black" BorderThickness="1">
-                <MenuItem Header="_Отчет по списанию тканей" Margin="10 5" x:Name="menuFabricReport" Click="menuFabricReport_Click"></MenuItem>
-                <MenuItem Header="_Отчет по списанию фурнитуры" Margin="10 5" x:Name="menuFurnitureReport" Click="menuFurnitureReport_Click"></MenuItem>
+            <Menu DockPanel.Dock="Top" Background="White" FontSize="14" FontWeight="SemiBold" BorderBrush="Black" BorderThickness="1">
+                <MenuItem Header="_Отчет по списанию тканей" Margin="0 5" x:Name="menuFabricReport" Click="menuFabricReport_Click"></MenuItem>
+                <MenuItem Header="_Отчет по списанию фурнитуры" Margin="0 5" x:Name="menuFurnitureReport" Click="menuFurnitureReport_Click"></MenuItem>
+                <MenuItem Header="_Отчет по остаткам ткани" Margin="0 5" x:Name="menuFabricRemains" Click="menuFabricRemains_Click"></MenuItem>
+                <MenuItem Header="_Отчет по остаткам фурнитуры" Margin="0 5" x:Name="menuFurnitureRemains" Click="menuFurnitureRemains_Click"></MenuItem>
                 <MenuItem Header="_Выйти" Margin="10 5" x:Name="menuOut" Click="menuOut_Click"></MenuItem>
             </Menu>
 
-            <DockPanel x:Name="dpFabricReport" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="True">
-                <DataGrid DockPanel.Dock="Top" x:Name="fabricReport" AutoGenerateColumns="False" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Margin="0 20 0 0">
-                    <DataGrid.Items>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                    </DataGrid.Items>
+            <DockPanel x:Name="dpFabricReport" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="True">
+                <DataGrid DockPanel.Dock="Top" x:Name="fabricReport" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFD1EEFC" AlternatingRowBackground="#FFFFFCD6" FontSize="16" FontWeight="SemiBold" Width="800" Height="300" Margin="0 20 0 20">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Артикул" Width="120" />
-                        <DataGridTextColumn Header="Название" Width="150" />
-                        <DataGridTextColumn Header="Цвет" Width="120" />
-                        <DataGridTextColumn Header="Рисунок" Width="110" />
-                        <DataGridTextColumn Header="Состав" Width="110" />
-                        <DataGridTextColumn Header="Причина" Width="180" />
+                        <DataGridTemplateColumn Header="Причина">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox x:Name="txtCauseFabric"></TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
 
-            <DockPanel x:Name="dpFurnitureReport" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -245 0 0">
-                <DataGrid DockPanel.Dock="Top" x:Name="furnitureReport" AutoGenerateColumns="False" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Margin="0 20 0 0">
-                    <DataGrid.Items>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                        <Label>ываыва</Label>
-                    </DataGrid.Items>
+            <DockPanel x:Name="dpFurnitureReport" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="True" Margin="0 -340 0 0">
+                <DataGrid DockPanel.Dock="Top" x:Name="furnitureReport" AutoGenerateColumns="False" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Height="300" Margin="0 20 0 0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Артикул" Width="170" />
-                        <DataGridTextColumn Header="Название" Width="220" />
-                        <DataGridTextColumn Header="Тип" Width="180" />
-                        <DataGridTextColumn Header="Причина" Width="220" />
+                        <DataGridTemplateColumn Header="Причина">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox x:Name="txtCauseFurniture"></TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+
+            <DockPanel x:Name="dpFabricRemnants" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="False" Margin="0 -340 0 0">
+                <DataGrid DockPanel.Dock="Top" x:Name="fabricRemnants" AutoGenerateColumns="False" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Height="300" Margin="0 20 0 0">
+                </DataGrid>
+            </DockPanel>
+
+            <DockPanel x:Name="dpFurnitureRemnants" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -340 0 0">
+                <DataGrid DockPanel.Dock="Top" x:Name="furnitureRemnants" AutoGenerateColumns="False" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Height="300" Margin="0 20 0 0">
                 </DataGrid>
             </DockPanel>
         </DockPanel>

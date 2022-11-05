@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище GarmentFactoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище GarmentFactoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Color">
           <Key>
             <PropertyRef Name="IdColor" />
@@ -35,7 +35,7 @@
           <Key>
             <PropertyRef Name="IdFabricColor" />
           </Key>
-          <Property Name="IdFabricColor" Type="int" Nullable="false" />
+          <Property Name="IdFabricColor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdFabric" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdColor" Type="int" Nullable="false" />
         </EntityType>
@@ -51,7 +51,7 @@
           <Key>
             <PropertyRef Name="IdFabricStructure" />
           </Key>
-          <Property Name="IdFabricStructure" Type="int" Nullable="false" />
+          <Property Name="IdFabricStructure" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdFabric" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdStructure" Type="int" Nullable="false" />
         </EntityType>
@@ -81,7 +81,7 @@
           <Key>
             <PropertyRef Name="IdFurnitureType" />
           </Key>
-          <Property Name="IdFurnitureType" Type="int" Nullable="false" />
+          <Property Name="IdFurnitureType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdFurniture" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdType" Type="int" Nullable="false" />
         </EntityType>
@@ -147,9 +147,10 @@
         <EntityType Name="WarehouseFabric">
           <Key>
             <PropertyRef Name="IdFabric" />
+            <PropertyRef Name="Roll" />
           </Key>
           <Property Name="IdFabric" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Roll" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Roll" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Length" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="WarehouseFurniture">
@@ -342,7 +343,7 @@
         </Association>
         <Association Name="FK_WarehouseFabric_Fabric">
           <End Role="Fabric" Type="Self.Fabric" Multiplicity="1" />
-          <End Role="WarehouseFabric" Type="Self.WarehouseFabric" Multiplicity="0..1" />
+          <End Role="WarehouseFabric" Type="Self.WarehouseFabric" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Fabric">
               <PropertyRef Name="IdFabric" />
@@ -452,8 +453,7 @@
             <End Role="WarehouseFurniture" EntitySet="WarehouseFurniture" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GarmentFactoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -621,9 +621,10 @@
         <EntityType Name="WarehouseFabric">
           <Key>
             <PropertyRef Name="IdFabric" />
+            <PropertyRef Name="Roll" />
           </Key>
           <Property Name="IdFabric" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Roll" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Roll" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Length" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Fabric" Relationship="Self.FK_WarehouseFabric_Fabric" FromRole="WarehouseFabric" ToRole="Fabric" />
         </EntityType>
@@ -710,7 +711,7 @@
         </Association>
         <Association Name="FK_WarehouseFabric_Fabric">
           <End Role="Fabric" Type="Self.Fabric" Multiplicity="1" />
-          <End Role="WarehouseFabric" Type="Self.WarehouseFabric" Multiplicity="0..1" />
+          <End Role="WarehouseFabric" Type="Self.WarehouseFabric" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Fabric">
               <PropertyRef Name="IdFabric" />

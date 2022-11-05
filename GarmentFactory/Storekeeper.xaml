@@ -6,24 +6,126 @@
         xmlns:local="clr-namespace:GarmentFactory"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Экран кладовщика" Height="500" Width="900" MinHeight="350" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="Экран кладовщика" Height="720" Width="900" MinHeight="720" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <DockPanel LastChildFill="False">
             <Menu DockPanel.Dock="Top" Background="White" FontSize="16" FontWeight="SemiBold" BorderBrush="Black" BorderThickness="1">
-                <MenuItem Header="_Список тканей" Margin="10 5" x:Name="menuFabricList" Click="menuFabricList_Click"></MenuItem>
-                <MenuItem Header="_Список фурнитуры" Margin="10 5" x:Name="menuFurnitureList" Click="menuFurnitureList_Click"></MenuItem>
-                <MenuItem Header="_Выйти" Margin="10 5" x:Name="menuOut" Click="menuOut_Click"></MenuItem>
+                <MenuItem Header="_Список тканей" Margin="10 5 0 5" x:Name="menuFabricList" Click="menuFabricList_Click"></MenuItem>
+                <MenuItem Header="_Список фурнитуры" Margin="0 5" x:Name="menuFurnitureList" Click="menuFurnitureList_Click"></MenuItem>
+                <MenuItem Header="_Поступление тканей" Margin="0 5" x:Name="menuFabricReceipt" Click="menuFabricReceipt_Click"></MenuItem>
+                <MenuItem Header="_Поступление фурнитуры" Margin="0 5" x:Name="menuFurnitureReceipt" Click="menuFurnitureReceipt_Click"></MenuItem>
+                <MenuItem Header="_Инвентаризация" Margin="0 5" x:Name="menuInventory" Click="menuFurnitureList_Click"></MenuItem>
+                <MenuItem Header="_Списание ткани" Margin="0 5" x:Name="menuFabric" Click="menuFurnitureList_Click"></MenuItem>
+                <MenuItem Header="_Списание фурнитуры" Margin="0 5" x:Name="menuFurniture" Click="menuFurnitureList_Click"></MenuItem>
+                <MenuItem Header="_Выйти" Margin="0 5" x:Name="menuOut" Click="menuOut_Click"></MenuItem>
             </Menu>
 
-            <DockPanel x:Name="dpFabricsList" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="True">
-                <DataGrid DockPanel.Dock="Top" x:Name="fabricGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Height="380" Margin="0 20 0 0">
+            <DockPanel LastChildFill="False" x:Name="dpFabricsList" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="True">
+                <DataGrid DockPanel.Dock="Top" x:Name="fabricGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFD1EEFC" AlternatingRowBackground="#FFFFFCD6" FontSize="16" FontWeight="SemiBold" Width="800" Height="550" Margin="0 20 0 0">
                     
                 </DataGrid>
             </DockPanel>
 
-            <DockPanel x:Name="dpFurnitureList" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -400 0 0">
-                <DataGrid DockPanel.Dock="Top" x:Name="furnitureGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Height="380" Margin="0 20 0 0">
+            <DockPanel LastChildFill="False" x:Name="dpFurnitureList" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -570 0 0">
+                <DataGrid DockPanel.Dock="Top" x:Name="furnitureGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFD1EEFC" AlternatingRowBackground="#FFFFFCD6" FontSize="16" FontWeight="SemiBold" Width="800" Height="550" Margin="0 20 0 0">
                 </DataGrid>
+            </DockPanel>
+
+            <DockPanel LastChildFill="False" x:Name="dpFabricReceipt" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -570 0 0">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите артикул:</Label>
+                    <TextBox x:Name="txtArtikulFabric" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите название:</Label>
+                    <TextBox x:Name="txtNameFabric" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите рисунок:</Label>
+                    <ComboBox x:Name="cmbPicture" FontSize="16" FontWeight="Bold" Padding="12" Margin="0 0 0 20" Width="250" Height="50"></ComboBox>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите ширину:</Label>
+                    <TextBox x:Name="txtWidthFabric" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите длину:</Label>
+                    <TextBox x:Name="txtLengthFabric" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите цену:</Label>
+                    <TextBox x:Name="txtPriceFabric" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Button x:Name="btnAddFabric" Click="btnAddFabric_Click" Style="{StaticResource ResourceKey=redButton}" Content="Добавить" Width="150" Height="50"></Button>
+                </StackPanel>
+            </DockPanel>
+
+            <DockPanel LastChildFill="False" x:Name="dpFurnitureReceipt" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -570 0 0">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите артикул:</Label>
+                    <TextBox x:Name="txtArtikulFurniture" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите название:</Label>
+                    <TextBox x:Name="txtNameFurniture" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите тип:</Label>
+                    <ComboBox x:Name="cmbType" FontSize="16" FontWeight="Bold" Padding="12" Margin="0 0 0 20" Width="250" Height="50"></ComboBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите ширину:</Label>
+                    <TextBox x:Name="txtWidthFurniture" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите длину:</Label>
+                    <TextBox x:Name="txtLengthFurniture" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите вес:</Label>
+                    <TextBox x:Name="txtWeightFurniture" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Label FontSize="16" Margin="0 10 10 30">Укажите цену:</Label>
+                    <TextBox x:Name="txtPriceFurniture" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 10 0 0" HorizontalAlignment="Center" >
+                    <Button x:Name="btnAddFurniture" Click="btnAddFurniture_Click" Style="{StaticResource ResourceKey=redButton}" Content="Добавить" Width="150" Height="50"></Button>
+                </StackPanel>
+            </DockPanel>
+
+            <DockPanel LastChildFill="False" x:Name="dpInvent" DockPanel.Dock="Top" Visibility="Visible" VerticalAlignment="Center" IsEnabled="True" Margin="0 -630 0 0">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0 20 ">
+                    <ComboBox Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                        <ComboBoxItem x:Name="cmbChoseCategory" IsSelected="True" Margin="0 0 0 20">Изделие/Ткани/Фурнитура</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold" Margin="20 0 0 0">
+                        <ComboBoxItem x:Name="cmbChoseElem" IsSelected="True" Margin="0 0 0 20">Содержимое</ComboBoxItem>
+                    </ComboBox>
+                    <TextBox x:Name="txtRecalculatedData" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0 0 0" PreviewMouseDown="txtRecalculatedData_PreviewMouseDown">Пересчитанные данные</TextBox>
+                </StackPanel>
+
+                <Label DockPanel.Dock="Top" x:Name="line" FontSize="36" Margin="20 0 20 0" HorizontalAlignment="Center">________________________________________________________________________________________________________</Label>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0 0 0 20">
+                    <Label Content="Расхождения:" FontWeight="Bold" FontSize="16" FontStyle="Italic"></Label>
+                    <Label Content="0 %" FontWeight="Bold" FontSize="16" FontStyle="Italic"></Label>
+                </StackPanel>
+
+                <Button DockPanel.Dock="Top" Style="{StaticResource ResourceKey=redButton}" Width="150" Height="50" Content="Утвердить"></Button>
             </DockPanel>
         </DockPanel>
     </Grid>

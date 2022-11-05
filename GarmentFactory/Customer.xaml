@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GarmentFactory"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Экран заказчика" Height="480" Width="900" MinHeight="480" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing">
+        Title="Экран заказчика" Height="480" Width="900" MinHeight="480" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <DockPanel LastChildFill="False">
             <Menu DockPanel.Dock="Top" Background="White" FontSize="16" FontWeight="SemiBold" BorderBrush="Black" BorderThickness="1">

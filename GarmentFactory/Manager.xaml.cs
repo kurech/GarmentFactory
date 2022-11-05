@@ -85,5 +85,19 @@ namespace GarmentFactory
         {
 
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
+            {
+                foreach (Product product in garmentFactoryEntities.Products)
+                {
+                    cmbProduct1.Items.Add(product.IdProduct + " " + product.Name);
+                    cmbProduct2.Items.Add(product.IdProduct + " " + product.Name);
+                    cmbProduct3.Items.Add(product.IdProduct + " " + product.Name);
+                }
+            }
+        }
+    
     }
 }
