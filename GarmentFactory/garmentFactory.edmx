@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище GarmentFactoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище GarmentFactoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Color">
           <Key>
             <PropertyRef Name="IdColor" />
@@ -46,6 +46,7 @@
           </Key>
           <Property Name="IdFabric" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdProduct" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FabricStructure">
           <Key>
@@ -453,7 +454,8 @@
             <End Role="WarehouseFurniture" EntitySet="WarehouseFurniture" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GarmentFactoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -463,9 +465,9 @@
           </Key>
           <Property Name="IdColor" Type="Int32" Nullable="false" />
           <Property Name="Color1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="FabricColors" Relationship="Self.FK_FabricColor_Color" FromRole="Color" ToRole="FabricColor" />
+          <NavigationProperty Name="FabricColor" Relationship="Self.FK_FabricColor_Color" FromRole="Color" ToRole="FabricColor" />
         </EntityType>
-        <EntityType Name="CustomProduct">
+        <EntityType Name="CustomProducts">
           <Key>
             <PropertyRef Name="IdOrder" />
           </Key>
@@ -473,7 +475,7 @@
           <Property Name="IdProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Count" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Product" Relationship="Self.FK_CustomProducts_Product" FromRole="CustomProducts" ToRole="Product" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_CustomProducts" FromRole="CustomProducts" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_CustomProducts" FromRole="CustomProducts" ToRole="Order" />
         </EntityType>
         <EntityType Name="Fabric">
           <Key>
@@ -486,26 +488,37 @@
           <Property Name="Length" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Picture" Relationship="Self.FK_Fabric_Picture" FromRole="Fabric" ToRole="Picture" />
-          <NavigationProperty Name="FabricColors" Relationship="Self.FK_FabricColor_Fabric" FromRole="Fabric" ToRole="FabricColor" />
-          <NavigationProperty Name="FabricStructures" Relationship="Self.FK_FabricStructure_Fabric" FromRole="Fabric" ToRole="FabricStructure" />
+          <NavigationProperty Name="FabricColor" Relationship="Self.FK_FabricColor_Fabric" FromRole="Fabric" ToRole="FabricColor" />
+          <NavigationProperty Name="FabricProduct" Relationship="Self.FK_FabricProduct_Fabric" FromRole="Fabric" ToRole="FabricProduct" />
+          <NavigationProperty Name="FabricStructure" Relationship="Self.FK_FabricStructure_Fabric" FromRole="Fabric" ToRole="FabricStructure" />
           <NavigationProperty Name="WarehouseFabric" Relationship="Self.FK_WarehouseFabric_Fabric" FromRole="Fabric" ToRole="WarehouseFabric" />
-          <NavigationProperty Name="Products" Relationship="Self.FabricProduct" FromRole="Fabric" ToRole="Product" />
         </EntityType>
         <EntityType Name="FabricColor">
           <Key>
             <PropertyRef Name="IdFabricColor" />
           </Key>
-          <Property Name="IdFabricColor" Type="Int32" Nullable="false" />
+          <Property Name="IdFabricColor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdFabric" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdColor" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Color" Relationship="Self.FK_FabricColor_Color" FromRole="FabricColor" ToRole="Color" />
           <NavigationProperty Name="Fabric" Relationship="Self.FK_FabricColor_Fabric" FromRole="FabricColor" ToRole="Fabric" />
         </EntityType>
+        <EntityType Name="FabricProduct">
+          <Key>
+            <PropertyRef Name="IdFabric" />
+            <PropertyRef Name="IdProduct" />
+          </Key>
+          <Property Name="IdFabric" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fabric" Relationship="Self.FK_FabricProduct_Fabric" FromRole="FabricProduct" ToRole="Fabric" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_FabricProduct_Product" FromRole="FabricProduct" ToRole="Product" />
+        </EntityType>
         <EntityType Name="FabricStructure">
           <Key>
             <PropertyRef Name="IdFabricStructure" />
           </Key>
-          <Property Name="IdFabricStructure" Type="Int32" Nullable="false" />
+          <Property Name="IdFabricStructure" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdFabric" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdStructure" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Fabric" Relationship="Self.FK_FabricStructure_Fabric" FromRole="FabricStructure" ToRole="Fabric" />
@@ -521,9 +534,9 @@
           <Property Name="Length" Type="Double" Nullable="false" />
           <Property Name="Weight" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
-          <NavigationProperty Name="FurnitureProducts" Relationship="Self.FK_FurnitureProduct_Furniture" FromRole="Furniture" ToRole="FurnitureProduct" />
-          <NavigationProperty Name="FurnitureTypes" Relationship="Self.FK_FurnitureType_Furniture" FromRole="Furniture" ToRole="FurnitureType" />
-          <NavigationProperty Name="WarehouseFurnitures" Relationship="Self.FK_WarehouseFurniture_Furniture" FromRole="Furniture" ToRole="WarehouseFurniture" />
+          <NavigationProperty Name="FurnitureProduct" Relationship="Self.FK_FurnitureProduct_Furniture" FromRole="Furniture" ToRole="FurnitureProduct" />
+          <NavigationProperty Name="FurnitureType" Relationship="Self.FK_FurnitureType_Furniture" FromRole="Furniture" ToRole="FurnitureType" />
+          <NavigationProperty Name="WarehouseFurniture" Relationship="Self.FK_WarehouseFurniture_Furniture" FromRole="Furniture" ToRole="WarehouseFurniture" />
         </EntityType>
         <EntityType Name="FurnitureProduct">
           <Key>
@@ -542,7 +555,7 @@
           <Key>
             <PropertyRef Name="IdFurnitureType" />
           </Key>
-          <Property Name="IdFurnitureType" Type="Int32" Nullable="false" />
+          <Property Name="IdFurnitureType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdFurniture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdType" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Furniture" Relationship="Self.FK_FurnitureType_Furniture" FromRole="FurnitureType" ToRole="Furniture" />
@@ -558,7 +571,7 @@
           <Property Name="ExecutionStage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdCustomer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CustomProduct" Relationship="Self.FK_Order_CustomProducts" FromRole="Order" ToRole="CustomProducts" />
+          <NavigationProperty Name="CustomProducts" Relationship="Self.FK_Order_CustomProducts" FromRole="Order" ToRole="CustomProducts" />
           <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK_Order_User1" FromRole="Order" ToRole="User" />
         </EntityType>
@@ -568,7 +581,7 @@
           </Key>
           <Property Name="IdPicture" Type="Int32" Nullable="false" />
           <Property Name="Picture1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Fabrics" Relationship="Self.FK_Fabric_Picture" FromRole="Picture" ToRole="Fabric" />
+          <NavigationProperty Name="Fabric" Relationship="Self.FK_Fabric_Picture" FromRole="Picture" ToRole="Fabric" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -579,8 +592,8 @@
           <Property Name="Width" Type="Int32" Nullable="false" />
           <Property Name="Lenght" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CustomProducts" Relationship="Self.FK_CustomProducts_Product" FromRole="Product" ToRole="CustomProducts" />
-          <NavigationProperty Name="FurnitureProducts" Relationship="Self.FK_FurnitureProduct_Product" FromRole="Product" ToRole="FurnitureProduct" />
-          <NavigationProperty Name="Fabrics" Relationship="Self.FabricProduct" FromRole="Product" ToRole="Fabric" />
+          <NavigationProperty Name="FabricProduct" Relationship="Self.FK_FabricProduct_Product" FromRole="Product" ToRole="FabricProduct" />
+          <NavigationProperty Name="FurnitureProduct" Relationship="Self.FK_FurnitureProduct_Product" FromRole="Product" ToRole="FurnitureProduct" />
         </EntityType>
         <EntityType Name="Structure">
           <Key>
@@ -588,9 +601,9 @@
           </Key>
           <Property Name="IdStructure" Type="Int32" Nullable="false" />
           <Property Name="Structure1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="FabricStructures" Relationship="Self.FK_FabricStructure_Structure" FromRole="Structure" ToRole="FabricStructure" />
+          <NavigationProperty Name="FabricStructure" Relationship="Self.FK_FabricStructure_Structure" FromRole="Structure" ToRole="FabricStructure" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -606,7 +619,7 @@
           </Key>
           <Property Name="IdType" Type="Int32" Nullable="false" />
           <Property Name="Type1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="FurnitureTypes" Relationship="Self.FK_FurnitureType_Type" FromRole="Type" ToRole="FurnitureType" />
+          <NavigationProperty Name="FurnitureType" Relationship="Self.FK_FurnitureType_Type" FromRole="Type" ToRole="FurnitureType" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -615,8 +628,8 @@
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
-          <NavigationProperty Name="Orders1" Relationship="Self.FK_Order_User1" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Order1" Relationship="Self.FK_Order_User1" FromRole="User" ToRole="Order" />
         </EntityType>
         <EntityType Name="WarehouseFabric">
           <Key>
@@ -651,7 +664,7 @@
         </Association>
         <Association Name="FK_CustomProducts_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="CustomProducts" Type="Self.CustomProduct" Multiplicity="*" />
+          <End Role="CustomProducts" Type="Self.CustomProducts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="IdProduct" />
@@ -662,7 +675,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_CustomProducts">
-          <End Role="CustomProducts" Type="Self.CustomProduct" Multiplicity="1" />
+          <End Role="CustomProducts" Type="Self.CustomProducts" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CustomProducts">
@@ -697,6 +710,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FabricProduct_Fabric">
+          <End Role="Fabric" Type="Self.Fabric" Multiplicity="1" />
+          <End Role="FabricProduct" Type="Self.FabricProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fabric">
+              <PropertyRef Name="IdFabric" />
+            </Principal>
+            <Dependent Role="FabricProduct">
+              <PropertyRef Name="IdFabric" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FabricStructure_Fabric">
           <End Role="Fabric" Type="Self.Fabric" Multiplicity="1" />
           <End Role="FabricStructure" Type="Self.FabricStructure" Multiplicity="*" />
@@ -718,6 +743,18 @@
             </Principal>
             <Dependent Role="WarehouseFabric">
               <PropertyRef Name="IdFabric" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FabricProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="FabricProduct" Type="Self.FabricProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IdProduct" />
+            </Principal>
+            <Dependent Role="FabricProduct">
+              <PropertyRef Name="IdProduct" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -817,91 +854,92 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FabricProduct">
-          <End Role="Fabric" Type="Self.Fabric" Multiplicity="*" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="GarmentFactoryEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Colors" EntityType="Self.Color" />
-          <EntitySet Name="CustomProducts" EntityType="Self.CustomProduct" />
-          <EntitySet Name="Fabrics" EntityType="Self.Fabric" />
-          <EntitySet Name="FabricColors" EntityType="Self.FabricColor" />
-          <EntitySet Name="FabricStructures" EntityType="Self.FabricStructure" />
-          <EntitySet Name="Furnitures" EntityType="Self.Furniture" />
-          <EntitySet Name="FurnitureProducts" EntityType="Self.FurnitureProduct" />
-          <EntitySet Name="FurnitureTypes" EntityType="Self.FurnitureType" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="Pictures" EntityType="Self.Picture" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="Structures" EntityType="Self.Structure" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Types" EntityType="Self.Type" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="WarehouseFabrics" EntityType="Self.WarehouseFabric" />
-          <EntitySet Name="WarehouseFurnitures" EntityType="Self.WarehouseFurniture" />
+          <EntitySet Name="Color" EntityType="Self.Color" />
+          <EntitySet Name="CustomProducts" EntityType="Self.CustomProducts" />
+          <EntitySet Name="Fabric" EntityType="Self.Fabric" />
+          <EntitySet Name="FabricColor" EntityType="Self.FabricColor" />
+          <EntitySet Name="FabricProduct" EntityType="Self.FabricProduct" />
+          <EntitySet Name="FabricStructure" EntityType="Self.FabricStructure" />
+          <EntitySet Name="Furniture" EntityType="Self.Furniture" />
+          <EntitySet Name="FurnitureProduct" EntityType="Self.FurnitureProduct" />
+          <EntitySet Name="FurnitureType" EntityType="Self.FurnitureType" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="Picture" EntityType="Self.Picture" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Structure" EntityType="Self.Structure" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="WarehouseFabric" EntityType="Self.WarehouseFabric" />
+          <EntitySet Name="WarehouseFurniture" EntityType="Self.WarehouseFurniture" />
           <AssociationSet Name="FK_FabricColor_Color" Association="Self.FK_FabricColor_Color">
-            <End Role="Color" EntitySet="Colors" />
-            <End Role="FabricColor" EntitySet="FabricColors" />
+            <End Role="Color" EntitySet="Color" />
+            <End Role="FabricColor" EntitySet="FabricColor" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomProducts_Product" Association="Self.FK_CustomProducts_Product">
-            <End Role="Product" EntitySet="Products" />
+            <End Role="Product" EntitySet="Product" />
             <End Role="CustomProducts" EntitySet="CustomProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_CustomProducts" Association="Self.FK_Order_CustomProducts">
             <End Role="CustomProducts" EntitySet="CustomProducts" />
-            <End Role="Order" EntitySet="Orders" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Fabric_Picture" Association="Self.FK_Fabric_Picture">
-            <End Role="Picture" EntitySet="Pictures" />
-            <End Role="Fabric" EntitySet="Fabrics" />
+            <End Role="Picture" EntitySet="Picture" />
+            <End Role="Fabric" EntitySet="Fabric" />
           </AssociationSet>
           <AssociationSet Name="FK_FabricColor_Fabric" Association="Self.FK_FabricColor_Fabric">
-            <End Role="Fabric" EntitySet="Fabrics" />
-            <End Role="FabricColor" EntitySet="FabricColors" />
+            <End Role="Fabric" EntitySet="Fabric" />
+            <End Role="FabricColor" EntitySet="FabricColor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FabricProduct_Fabric" Association="Self.FK_FabricProduct_Fabric">
+            <End Role="Fabric" EntitySet="Fabric" />
+            <End Role="FabricProduct" EntitySet="FabricProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_FabricStructure_Fabric" Association="Self.FK_FabricStructure_Fabric">
-            <End Role="Fabric" EntitySet="Fabrics" />
-            <End Role="FabricStructure" EntitySet="FabricStructures" />
+            <End Role="Fabric" EntitySet="Fabric" />
+            <End Role="FabricStructure" EntitySet="FabricStructure" />
           </AssociationSet>
           <AssociationSet Name="FK_WarehouseFabric_Fabric" Association="Self.FK_WarehouseFabric_Fabric">
-            <End Role="Fabric" EntitySet="Fabrics" />
-            <End Role="WarehouseFabric" EntitySet="WarehouseFabrics" />
+            <End Role="Fabric" EntitySet="Fabric" />
+            <End Role="WarehouseFabric" EntitySet="WarehouseFabric" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FabricProduct_Product" Association="Self.FK_FabricProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="FabricProduct" EntitySet="FabricProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_FabricStructure_Structure" Association="Self.FK_FabricStructure_Structure">
-            <End Role="Structure" EntitySet="Structures" />
-            <End Role="FabricStructure" EntitySet="FabricStructures" />
+            <End Role="Structure" EntitySet="Structure" />
+            <End Role="FabricStructure" EntitySet="FabricStructure" />
           </AssociationSet>
           <AssociationSet Name="FK_FurnitureProduct_Furniture" Association="Self.FK_FurnitureProduct_Furniture">
-            <End Role="Furniture" EntitySet="Furnitures" />
-            <End Role="FurnitureProduct" EntitySet="FurnitureProducts" />
+            <End Role="Furniture" EntitySet="Furniture" />
+            <End Role="FurnitureProduct" EntitySet="FurnitureProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_FurnitureType_Furniture" Association="Self.FK_FurnitureType_Furniture">
-            <End Role="Furniture" EntitySet="Furnitures" />
-            <End Role="FurnitureType" EntitySet="FurnitureTypes" />
+            <End Role="Furniture" EntitySet="Furniture" />
+            <End Role="FurnitureType" EntitySet="FurnitureType" />
           </AssociationSet>
           <AssociationSet Name="FK_WarehouseFurniture_Furniture" Association="Self.FK_WarehouseFurniture_Furniture">
-            <End Role="Furniture" EntitySet="Furnitures" />
-            <End Role="WarehouseFurniture" EntitySet="WarehouseFurnitures" />
+            <End Role="Furniture" EntitySet="Furniture" />
+            <End Role="WarehouseFurniture" EntitySet="WarehouseFurniture" />
           </AssociationSet>
           <AssociationSet Name="FK_FurnitureProduct_Product" Association="Self.FK_FurnitureProduct_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="FurnitureProduct" EntitySet="FurnitureProducts" />
+            <End Role="Product" EntitySet="Product" />
+            <End Role="FurnitureProduct" EntitySet="FurnitureProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_FurnitureType_Type" Association="Self.FK_FurnitureType_Type">
-            <End Role="Type" EntitySet="Types" />
-            <End Role="FurnitureType" EntitySet="FurnitureTypes" />
+            <End Role="Type" EntitySet="Type" />
+            <End Role="FurnitureType" EntitySet="FurnitureType" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Order" EntitySet="Orders" />
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_User1" Association="Self.FK_Order_User1">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FabricProduct" Association="Self.FabricProduct">
-            <End Role="Fabric" EntitySet="Fabrics" />
-            <End Role="Product" EntitySet="Products" />
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -910,7 +948,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище GarmentFactoryModelContainer" CdmEntityContainer="GarmentFactoryEntities">
-          <EntitySetMapping Name="Colors">
+          <EntitySetMapping Name="Color">
             <EntityTypeMapping TypeName="GarmentFactoryModel.Color">
               <MappingFragment StoreEntitySet="Color">
                 <ScalarProperty Name="IdColor" ColumnName="IdColor" />
@@ -919,7 +957,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CustomProducts">
-            <EntityTypeMapping TypeName="GarmentFactoryModel.CustomProduct">
+            <EntityTypeMapping TypeName="GarmentFactoryModel.CustomProducts">
               <MappingFragment StoreEntitySet="CustomProducts">
                 <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
                 <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
@@ -927,7 +965,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Fabrics">
+          <EntitySetMapping Name="Fabric">
             <EntityTypeMapping TypeName="GarmentFactoryModel.Fabric">
               <MappingFragment StoreEntitySet="Fabric">
                 <ScalarProperty Name="IdFabric" ColumnName="IdFabric" />
@@ -939,7 +977,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FabricColors">
+          <EntitySetMapping Name="FabricColor">
             <EntityTypeMapping TypeName="GarmentFactoryModel.FabricColor">
               <MappingFragment StoreEntitySet="FabricColor">
                 <ScalarProperty Name="IdFabricColor" ColumnName="IdFabricColor" />
@@ -948,7 +986,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FabricStructures">
+          <EntitySetMapping Name="FabricProduct">
+            <EntityTypeMapping TypeName="GarmentFactoryModel.FabricProduct">
+              <MappingFragment StoreEntitySet="FabricProduct">
+                <ScalarProperty Name="IdFabric" ColumnName="IdFabric" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FabricStructure">
             <EntityTypeMapping TypeName="GarmentFactoryModel.FabricStructure">
               <MappingFragment StoreEntitySet="FabricStructure">
                 <ScalarProperty Name="IdFabricStructure" ColumnName="IdFabricStructure" />
@@ -957,7 +1004,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Furnitures">
+          <EntitySetMapping Name="Furniture">
             <EntityTypeMapping TypeName="GarmentFactoryModel.Furniture">
               <MappingFragment StoreEntitySet="Furniture">
                 <ScalarProperty Name="IdFurniture" ColumnName="IdFurniture" />
@@ -969,7 +1016,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FurnitureProducts">
+          <EntitySetMapping Name="FurnitureProduct">
             <EntityTypeMapping TypeName="GarmentFactoryModel.FurnitureProduct">
               <MappingFragment StoreEntitySet="FurnitureProduct">
                 <ScalarProperty Name="IdFurniture" ColumnName="IdFurniture" />
@@ -980,7 +1027,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FurnitureTypes">
+          <EntitySetMapping Name="FurnitureType">
             <EntityTypeMapping TypeName="GarmentFactoryModel.FurnitureType">
               <MappingFragment StoreEntitySet="FurnitureType">
                 <ScalarProperty Name="IdFurnitureType" ColumnName="IdFurnitureType" />
@@ -989,7 +1036,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
+          <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="GarmentFactoryModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
@@ -1000,7 +1047,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Pictures">
+          <EntitySetMapping Name="Picture">
             <EntityTypeMapping TypeName="GarmentFactoryModel.Picture">
               <MappingFragment StoreEntitySet="Picture">
                 <ScalarProperty Name="IdPicture" ColumnName="IdPicture" />
@@ -1008,7 +1055,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
+          <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="GarmentFactoryModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
@@ -1018,7 +1065,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Structures">
+          <EntitySetMapping Name="Structure">
             <EntityTypeMapping TypeName="GarmentFactoryModel.Structure">
               <MappingFragment StoreEntitySet="Structure">
                 <ScalarProperty Name="IdStructure" ColumnName="IdStructure" />
@@ -1027,7 +1074,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="GarmentFactoryModel.sysdiagram">
+            <EntityTypeMapping TypeName="GarmentFactoryModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1037,7 +1084,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Types">
+          <EntitySetMapping Name="Type">
             <EntityTypeMapping TypeName="GarmentFactoryModel.Type">
               <MappingFragment StoreEntitySet="Type">
                 <ScalarProperty Name="IdType" ColumnName="IdType" />
@@ -1045,7 +1092,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
+          <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="GarmentFactoryModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Login" ColumnName="Login" />
@@ -1054,7 +1101,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WarehouseFabrics">
+          <EntitySetMapping Name="WarehouseFabric">
             <EntityTypeMapping TypeName="GarmentFactoryModel.WarehouseFabric">
               <MappingFragment StoreEntitySet="WarehouseFabric">
                 <ScalarProperty Name="IdFabric" ColumnName="IdFabric" />
@@ -1063,7 +1110,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WarehouseFurnitures">
+          <EntitySetMapping Name="WarehouseFurniture">
             <EntityTypeMapping TypeName="GarmentFactoryModel.WarehouseFurniture">
               <MappingFragment StoreEntitySet="WarehouseFurniture">
                 <ScalarProperty Name="Party" ColumnName="Party" />
@@ -1072,14 +1119,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="FabricProduct" TypeName="GarmentFactoryModel.FabricProduct" StoreEntitySet="FabricProduct">
-            <EndProperty Name="Fabric">
-              <ScalarProperty Name="IdFabric" ColumnName="IdFabric" />
-            </EndProperty>
-            <EndProperty Name="Product">
-              <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1094,7 +1133,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />

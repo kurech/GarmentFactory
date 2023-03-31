@@ -17,7 +17,7 @@
                 <MenuItem Header="_Выйти" Margin="10 5" x:Name="menuOut" Click="menuOut_Click"></MenuItem>
             </Menu>
 
-            <DockPanel x:Name="dpFabricReport" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="True">
+            <DockPanel x:Name="dpFabricReport" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="True">
                 <DataGrid DockPanel.Dock="Top" x:Name="fabricReport" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFD1EEFC" AlternatingRowBackground="#FFFFFCD6" FontSize="16" FontWeight="SemiBold" Width="800" Height="300" Margin="0 20 0 20">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Причина">
@@ -45,7 +45,7 @@
                 </DataGrid>
             </DockPanel>
 
-            <DockPanel x:Name="dpFabricRemnants" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="False" Margin="0 -340 0 0">
+            <DockPanel x:Name="dpFabricRemnants" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="False" Margin="0 -340 0 0">
                 <DataGrid DockPanel.Dock="Top" x:Name="fabricRemnants" AutoGenerateColumns="False" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFE0A9AF" AlternatingRowBackground="#FFB5D5CA" FontSize="16" FontWeight="SemiBold" Width="800" Height="300" Margin="0 20 0 0">
                 </DataGrid>
             </DockPanel>

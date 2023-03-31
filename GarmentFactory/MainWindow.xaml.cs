@@ -31,7 +31,7 @@ namespace GarmentFactory
             {
                 using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
                 {
-                    foreach (User user in garmentFactoryEntities.Users)
+                    foreach (User user in garmentFactoryEntities.User)
                     {
                         if (user.Login == txtLogin.Text && user.Password == txtPassword.Text)
                         { 

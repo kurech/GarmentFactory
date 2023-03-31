@@ -17,13 +17,13 @@ namespace GarmentFactory
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Type()
         {
-            this.FurnitureTypes = new HashSet<FurnitureType>();
+            this.FurnitureType = new HashSet<FurnitureType>();
         }
     
         public int IdType { get; set; }
         public string Type1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FurnitureType> FurnitureTypes { get; set; }
+        public virtual ICollection<FurnitureType> FurnitureType { get; set; }
     }
 }

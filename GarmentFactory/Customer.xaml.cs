@@ -97,7 +97,7 @@ namespace GarmentFactory
         {
             using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
             {
-                foreach (Product product in garmentFactoryEntities.Products)
+                foreach (Product product in garmentFactoryEntities.Product)
                 {
                     cmbProduct1.Items.Add(product.IdProduct + " " + product.Name);
                     cmbProduct2.Items.Add(product.IdProduct + " " + product.Name);

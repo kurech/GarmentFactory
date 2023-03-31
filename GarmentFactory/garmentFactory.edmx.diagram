@@ -4,31 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ec9c0a7323ce4643a821cd1cf6f23ff8" Name="Diagram1" ZoomLevel="100">
-        <EntityTypeShape EntityType="GarmentFactoryModel.Color" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.CustomProduct" Width="1.5" PointX="7.5" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.Fabric" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.FabricColor" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.FabricStructure" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.Furniture" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.FurnitureProduct" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.FurnitureType" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.Order" Width="1.5" PointX="9.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.Picture" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.Product" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.Structure" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.sysdiagram" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.Type" Width="1.5" PointX="5.25" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.User" Width="1.5" PointX="7.5" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.WarehouseFabric" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarmentFactoryModel.WarehouseFurniture" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+      <Diagram DiagramId="95694c929db04932b85d5cc101c83fcc" Name="Diagram1">
+        <EntityTypeShape EntityType="GarmentFactoryModel.Color" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.CustomProducts" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.Fabric" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.FabricColor" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.FabricProduct" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.FabricStructure" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.Furniture" Width="1.5" PointX="6" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.FurnitureProduct" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.FurnitureType" Width="1.5" PointX="8.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.Order" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.Picture" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.Product" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.Structure" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.Type" Width="1.5" PointX="6" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.User" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.WarehouseFabric" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GarmentFactoryModel.WarehouseFurniture" Width="1.5" PointX="8.25" PointY="24.875" IsExpanded="true" />
         <AssociationConnector Association="GarmentFactoryModel.FK_FabricColor_Color" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_CustomProducts_Product" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_Order_CustomProducts" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_Fabric_Picture" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_FabricColor_Fabric" ManuallyRouted="false" />
+        <AssociationConnector Association="GarmentFactoryModel.FK_FabricProduct_Fabric" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_FabricStructure_Fabric" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_WarehouseFabric_Fabric" ManuallyRouted="false" />
+        <AssociationConnector Association="GarmentFactoryModel.FK_FabricProduct_Product" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_FabricStructure_Structure" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_FurnitureProduct_Furniture" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_FurnitureType_Furniture" ManuallyRouted="false" />
@@ -37,7 +40,6 @@
         <AssociationConnector Association="GarmentFactoryModel.FK_FurnitureType_Type" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_Order_User" ManuallyRouted="false" />
         <AssociationConnector Association="GarmentFactoryModel.FK_Order_User1" ManuallyRouted="false" />
-        <AssociationConnector Association="GarmentFactoryModel.FabricProduct" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

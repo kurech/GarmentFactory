@@ -17,10 +17,10 @@ namespace GarmentFactory
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Fabric()
         {
-            this.FabricColors = new HashSet<FabricColor>();
-            this.FabricStructures = new HashSet<FabricStructure>();
+            this.FabricColor = new HashSet<FabricColor>();
+            this.FabricProduct = new HashSet<FabricProduct>();
+            this.FabricStructure = new HashSet<FabricStructure>();
             this.WarehouseFabric = new HashSet<WarehouseFabric>();
-            this.Products = new HashSet<Product>();
         }
     
         public string IdFabric { get; set; }
@@ -32,12 +32,12 @@ namespace GarmentFactory
     
         public virtual Picture Picture { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FabricColor> FabricColors { get; set; }
+        public virtual ICollection<FabricColor> FabricColor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FabricStructure> FabricStructures { get; set; }
+        public virtual ICollection<FabricProduct> FabricProduct { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FabricStructure> FabricStructure { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseFabric> WarehouseFabric { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
     }
 }

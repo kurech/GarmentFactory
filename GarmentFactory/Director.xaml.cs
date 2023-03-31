@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace GarmentFactory
             dpFurnitureReport.Visibility = Visibility.Hidden;
             dpFurnitureReport.IsEnabled = false;
 
-            PrintDoc();
+            PrintDoc(fabricReport, "Отчет по списанию тканей");
         }
 
         private void menuFurnitureReport_Click(object sender, RoutedEventArgs e)
@@ -54,11 +55,25 @@ namespace GarmentFactory
             mainWindow.Show();
             this.Hide();
         }
-        
-        private void PrintDoc()
+
+        string text = "";
+        private void PrintDoc(DataGrid dataGrid, string header)
         {
+            foreach (var a in dataGrid.Items)
+            {
+                text += a + "\n";
+            }
+            
             PrintDialog printDlg = new PrintDialog();
-            printDlg.PrintVisual(dpFabricReport, "Отчет по списанию тканей");
+            TextBlock visual = new TextBlock();
+            visual.Inlines.Add(text);
+            visual.Margin = new Thickness(5);
+            visual.TextWrapping = TextWrapping.Wrap;
+            Size pageSize = new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight);
+            visual.Measure(pageSize);
+            visual.Arrange(new Rect(0, 0, pageSize.Width, pageSize.Height));
+            if (printDlg.ShowDialog() == true)
+                printDlg.PrintVisual(visual, header);
         }
 
         private void menuFabricRemains_Click(object sender, RoutedEventArgs e)
@@ -75,12 +90,12 @@ namespace GarmentFactory
         {
             using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
             {
-                var fabricrep = from Fabric in garmentFactoryEntities.Fabrics
-                                join Picture in garmentFactoryEntities.Pictures on Fabric.IdPicture equals Picture.IdPicture
-                                join FabricStructure in garmentFactoryEntities.FabricStructures on Fabric.IdFabric equals FabricStructure.IdFabric
-                                join Structure in garmentFactoryEntities.Structures on FabricStructure.IdStructure equals Structure.IdStructure
-                                join FabricColor in garmentFactoryEntities.FabricColors on Fabric.IdFabric equals FabricColor.IdFabric
-                                join Color in garmentFactoryEntities.Colors on FabricColor.IdColor equals Color.IdColor
+                var fabricrep = from Fabric in garmentFactoryEntities.Fabric
+                                join Picture in garmentFactoryEntities.Picture on Fabric.IdPicture equals Picture.IdPicture
+                                join FabricStructure in garmentFactoryEntities.FabricStructure on Fabric.IdFabric equals FabricStructure.IdFabric
+                                join Structure in garmentFactoryEntities.Structure on FabricStructure.IdStructure equals Structure.IdStructure
+                                join FabricColor in garmentFactoryEntities.FabricColor on Fabric.IdFabric equals FabricColor.IdFabric
+                                join Color in garmentFactoryEntities.Color on FabricColor.IdColor equals Color.IdColor
                                 select new
                                 {
                                     Артикул = Fabric.IdFabric,
@@ -89,23 +104,7 @@ namespace GarmentFactory
                                     Состав = Structure.Structure1,
                                     Рисунок = Picture.Picture1
                                 };
-                MessageBox.Show(fabricrep.Count().ToString());
                 fabricReport.ItemsSource = fabricrep.ToList();
-
-                /*var furniturelist = from Furniture in garmentFactoryEntities.Furnitures
-                                    join FurnitureType in garmentFactoryEntities.FurnitureTypes on Furniture.IdFurniture equals FurnitureType.IdFurniture
-                                    join Type in garmentFactoryEntities.Types on FurnitureType.IdType equals Type.IdType
-                                    select new
-                                    {
-                                        Артикул = Furniture.IdFurniture,
-                                        Название = Furniture.Name,
-                                        Тип = Type.Type1,
-                                        Ширина = Furniture.Width,
-                                        Длина = Furniture.Length,
-                                        Вес = Furniture.Weight,
-                                        Цена = Furniture.Price
-                                    };
-                furnitureGrid.ItemsSource = furniturelist.ToList();*/
             }
         }
     }

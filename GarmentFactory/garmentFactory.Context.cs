@@ -25,22 +25,23 @@ namespace GarmentFactory
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Color> Colors { get; set; }
-        public virtual DbSet<CustomProduct> CustomProducts { get; set; }
-        public virtual DbSet<Fabric> Fabrics { get; set; }
-        public virtual DbSet<FabricColor> FabricColors { get; set; }
-        public virtual DbSet<FabricStructure> FabricStructures { get; set; }
-        public virtual DbSet<Furniture> Furnitures { get; set; }
-        public virtual DbSet<FurnitureProduct> FurnitureProducts { get; set; }
-        public virtual DbSet<FurnitureType> FurnitureTypes { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Picture> Pictures { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Structure> Structures { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Type> Types { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<WarehouseFabric> WarehouseFabrics { get; set; }
-        public virtual DbSet<WarehouseFurniture> WarehouseFurnitures { get; set; }
+        public virtual DbSet<Color> Color { get; set; }
+        public virtual DbSet<CustomProducts> CustomProducts { get; set; }
+        public virtual DbSet<Fabric> Fabric { get; set; }
+        public virtual DbSet<FabricColor> FabricColor { get; set; }
+        public virtual DbSet<FabricProduct> FabricProduct { get; set; }
+        public virtual DbSet<FabricStructure> FabricStructure { get; set; }
+        public virtual DbSet<Furniture> Furniture { get; set; }
+        public virtual DbSet<FurnitureProduct> FurnitureProduct { get; set; }
+        public virtual DbSet<FurnitureType> FurnitureType { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<Picture> Picture { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Structure> Structure { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Type> Type { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<WarehouseFabric> WarehouseFabric { get; set; }
+        public virtual DbSet<WarehouseFurniture> WarehouseFurniture { get; set; }
     }
 }

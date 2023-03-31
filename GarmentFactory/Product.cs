@@ -17,9 +17,9 @@ namespace GarmentFactory
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.CustomProducts = new HashSet<CustomProduct>();
-            this.FurnitureProducts = new HashSet<FurnitureProduct>();
-            this.Fabrics = new HashSet<Fabric>();
+            this.CustomProducts = new HashSet<CustomProducts>();
+            this.FabricProduct = new HashSet<FabricProduct>();
+            this.FurnitureProduct = new HashSet<FurnitureProduct>();
         }
     
         public string IdProduct { get; set; }
@@ -28,10 +28,22 @@ namespace GarmentFactory
         public int Lenght { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomProduct> CustomProducts { get; set; }
+        public virtual ICollection<CustomProducts> CustomProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FurnitureProduct> FurnitureProducts { get; set; }
+        public virtual ICollection<FabricProduct> FabricProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Fabric> Fabrics { get; set; }
+        public virtual ICollection<FurnitureProduct> FurnitureProduct { get; set; }
+
+        public string ImgPath
+        {
+            get
+            {
+                string result = "/Resources/" + this.IdProduct + ".jpg";
+                if (result == "/Resources/1138905410207.jpg" || result == "/Resources/136649165.jpg" || result == "/Resources/140547110.jpg" || result == "/Resources/15030430.jpg" || result == "/Resources/15030780.jpg" || result == "/Resources/703.583.31.jpg" || result == "/Resources/gr29377.jpg" || result == "/Resources/НД-2201-02057.jpg" || result == "/Resources/НЛ-5501-01933.jpg")
+                    return "/Resources/4022221441666.jpg";
+                else
+                    return result;
+            }
+        }
     }
 }

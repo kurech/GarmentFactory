@@ -17,13 +17,13 @@ namespace GarmentFactory
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Color()
         {
-            this.FabricColors = new HashSet<FabricColor>();
+            this.FabricColor = new HashSet<FabricColor>();
         }
     
         public int IdColor { get; set; }
         public string Color1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FabricColor> FabricColors { get; set; }
+        public virtual ICollection<FabricColor> FabricColor { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace GarmentFactory
         public string IdCustomer { get; set; }
         public string IdManager { get; set; }
     
-        public virtual CustomProduct CustomProduct { get; set; }
+        public virtual CustomProducts CustomProducts { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
     }

@@ -17,9 +17,9 @@ namespace GarmentFactory
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Furniture()
         {
-            this.FurnitureProducts = new HashSet<FurnitureProduct>();
-            this.FurnitureTypes = new HashSet<FurnitureType>();
-            this.WarehouseFurnitures = new HashSet<WarehouseFurniture>();
+            this.FurnitureProduct = new HashSet<FurnitureProduct>();
+            this.FurnitureType = new HashSet<FurnitureType>();
+            this.WarehouseFurniture = new HashSet<WarehouseFurniture>();
         }
     
         public string IdFurniture { get; set; }
@@ -30,10 +30,10 @@ namespace GarmentFactory
         public double Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FurnitureProduct> FurnitureProducts { get; set; }
+        public virtual ICollection<FurnitureProduct> FurnitureProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FurnitureType> FurnitureTypes { get; set; }
+        public virtual ICollection<FurnitureType> FurnitureType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WarehouseFurniture> WarehouseFurnitures { get; set; }
+        public virtual ICollection<WarehouseFurniture> WarehouseFurniture { get; set; }
     }
 }

@@ -17,13 +17,13 @@ namespace GarmentFactory
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Structure()
         {
-            this.FabricStructures = new HashSet<FabricStructure>();
+            this.FabricStructure = new HashSet<FabricStructure>();
         }
     
         public int IdStructure { get; set; }
         public string Structure1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FabricStructure> FabricStructures { get; set; }
+        public virtual ICollection<FabricStructure> FabricStructure { get; set; }
     }
 }

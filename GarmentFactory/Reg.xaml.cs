@@ -37,7 +37,7 @@ namespace GarmentFactory
             {
                 using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
                 {
-                    foreach(User user1 in garmentFactoryEntities.Users)
+                    foreach(User user1 in garmentFactoryEntities.User)
                     {
                         if(user1.Login == txtLogin.Text)
                         {
@@ -50,7 +50,7 @@ namespace GarmentFactory
                         Password = txtPassword.Text,
                         Role = "Заказчик"
                     };
-                    garmentFactoryEntities.Users.Add(user);
+                    garmentFactoryEntities.User.Add(user);
                     garmentFactoryEntities.SaveChanges();
                     MessageBox.Show($"Аккаунт {user.Login} успешно зарегистрирован!", "Seccess", MessageBoxButton.OK, MessageBoxImage.Information);
                 }

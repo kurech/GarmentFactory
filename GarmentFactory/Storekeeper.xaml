@@ -3,10 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GarmentFactory"
+        xmlns:local="clr-namespace:GarmentFactory" xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Экран кладовщика" Height="720" Width="900" MinHeight="720" MinWidth="900" Icon="Resources/logo-02.jpg" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="Экран кладовщика" Height="720" Width="1100" MinHeight="720" MinWidth="1100" Icon="Resources/logo-02.jpg" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Window.Resources>
+        <sys:String x:Key="NullImage">
+            pack://application:,,,/Resources/4022221441666.jpg
+        </sys:String>
+    </Window.Resources>
     <Grid>
         <DockPanel LastChildFill="False">
             <Menu DockPanel.Dock="Top" Background="White" FontSize="16" FontWeight="SemiBold" BorderBrush="Black" BorderThickness="1">
@@ -14,15 +19,22 @@
                 <MenuItem Header="_Список фурнитуры" Margin="0 5" x:Name="menuFurnitureList" Click="menuFurnitureList_Click"></MenuItem>
                 <MenuItem Header="_Поступление тканей" Margin="0 5" x:Name="menuFabricReceipt" Click="menuFabricReceipt_Click"></MenuItem>
                 <MenuItem Header="_Поступление фурнитуры" Margin="0 5" x:Name="menuFurnitureReceipt" Click="menuFurnitureReceipt_Click"></MenuItem>
-                <MenuItem Header="_Инвентаризация" Margin="0 5" x:Name="menuInventory" Click="menuFurnitureList_Click"></MenuItem>
-                <MenuItem Header="_Списание ткани" Margin="0 5" x:Name="menuFabric" Click="menuFurnitureList_Click"></MenuItem>
-                <MenuItem Header="_Списание фурнитуры" Margin="0 5" x:Name="menuFurniture" Click="menuFurnitureList_Click"></MenuItem>
+                <MenuItem Header="_Инвентаризация" Margin="0 5" x:Name="menuInventory" Click="menuInventory_Click"></MenuItem>
+                <MenuItem Header="_Продукция предприятия" Margin="0 5" x:Name="menuCompanyProducts" Click="menuCompanyProducts_Click"></MenuItem>
                 <MenuItem Header="_Выйти" Margin="0 5" x:Name="menuOut" Click="menuOut_Click"></MenuItem>
             </Menu>
 
             <DockPanel LastChildFill="False" x:Name="dpFabricsList" DockPanel.Dock="Top" Visibility="Hidden" IsEnabled="True">
-                <DataGrid DockPanel.Dock="Top" x:Name="fabricGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFD1EEFC" AlternatingRowBackground="#FFFFFCD6" FontSize="16" FontWeight="SemiBold" Width="800" Height="550" Margin="0 20 0 0">
-                    
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                    <TextBox x:Name="searchFabric" Style="{StaticResource ResourceKey=greenTextbox}" Width="200" Height="40" Margin="0 20" TextChanged="searchFabric_TextChanged"></TextBox>
+                    <ComboBox x:Name="cmbsearchFabric" Margin="20 0 0 0" Height="40" Width="150" SelectionChanged="cmbsearchFabric_SelectionChanged">
+                        <ComboBoxItem>метр</ComboBoxItem>
+                        <ComboBoxItem>сантиметр</ComboBoxItem>
+                        <ComboBoxItem>миллиметр</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <DataGrid DockPanel.Dock="Top" x:Name="fabricGrid" AutoGenerateColumns="True" HorizontalGridLinesBrush="#FFB5D5CA" RowBackground="#FFD1EEFC" AlternatingRowBackground="#FFFFFCD6" FontSize="16" FontWeight="SemiBold" Width="800" Height="500" Margin="0 20 0 0">
+
                 </DataGrid>
             </DockPanel>
 
@@ -108,13 +120,13 @@
                 </StackPanel>
             </DockPanel>
 
-            <DockPanel LastChildFill="False" x:Name="dpInvent" DockPanel.Dock="Top" Visibility="Visible" VerticalAlignment="Center" IsEnabled="True" Margin="0 -630 0 0">
+            <DockPanel LastChildFill="False" x:Name="dpInvent" DockPanel.Dock="Top" Visibility="Hidden" VerticalAlignment="Center" IsEnabled="True" Margin="0 -630 0 0">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0 20 ">
                     <ComboBox Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
                         <ComboBoxItem x:Name="cmbChoseCategory" IsSelected="True" Margin="0 0 0 20">Изделие/Ткани/Фурнитура</ComboBoxItem>
                     </ComboBox>
-                    <ComboBox Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold" Margin="20 0 0 0">
-                        <ComboBoxItem x:Name="cmbChoseElem" IsSelected="True" Margin="0 0 0 20">Содержимое</ComboBoxItem>
+                    <ComboBox x:Name="cmbChoseElem" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold" Margin="20 0 0 0">
+                        <ComboBoxItem  IsSelected="True" Margin="0 0 0 20">Содержимое</ComboBoxItem>
                     </ComboBox>
                     <TextBox x:Name="txtRecalculatedData" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0 0 0" PreviewMouseDown="txtRecalculatedData_PreviewMouseDown">Пересчитанные данные</TextBox>
                 </StackPanel>
@@ -126,6 +138,50 @@
                 </StackPanel>
 
                 <Button DockPanel.Dock="Top" Style="{StaticResource ResourceKey=redButton}" Width="150" Height="50" Content="Утвердить"></Button>
+            </DockPanel>
+
+            <DockPanel LastChildFill="False" x:Name="dpCompanyProducts" DockPanel.Dock="Top" Visibility="Visible" HorizontalAlignment="Center" IsEnabled="True" Margin="0 -650 0 0">
+                <ListView DockPanel.Dock="Top" x:Name="ListProducts" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="600" Margin="0 20">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel>
+
+                            </WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="Black">
+                                <Grid Width="300" Height="200">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="5*"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                    <Image Grid.Row="1" Source="{Binding ImgPath, FallbackValue={StaticResource NullImage}}" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                                    <Button Grid.Row="2" Content="Перейти" x:Name="btnOneOfTheProducts" Click="btnOneOfTheProducts_Click"></Button>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
+
+            <DockPanel LastChildFill="False" x:Name="dpFabricFurnitureWriteOff" DockPanel.Dock="Top" Visibility="Hidden" VerticalAlignment="Center" IsEnabled="True" Margin="0 -630 0 0">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0 0 0 0">
+                    <ComboBox x:Name="cmbChoseFabric" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold" Margin="0 0 20 0">
+                        <ComboBoxItem  IsSelected="True">Ткань</ComboBoxItem>
+                    </ComboBox>
+                    <Button Style="{StaticResource ResourceKey=redButton}" x:Name="btnFabricWriteOff" Click="btnFabricWriteOff_Click" Width="150" Height="50" Content="Списать"></Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
+                    <ComboBox x:Name="cmbChoseFurniture" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold" Margin="0 0 20 0">
+                        <ComboBoxItem  IsSelected="True">Фурнитура</ComboBoxItem>
+                    </ComboBox>
+                    <Button Style="{StaticResource ResourceKey=redButton}" x:Name="btnFurnitureWriteOff" Click="btnFurnitureWriteOff_Click" Width="150" Height="50" Content="Списать"></Button>
+                </StackPanel>
             </DockPanel>
         </DockPanel>
     </Grid>
