@@ -233,16 +233,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="garmentFactory.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>garmentFactory.edmx</DependentUpon>
-      <LastGenOutput>garmentFactory.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="garmentFactory.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>garmentFactory.edmx</DependentUpon>
-      <LastGenOutput>garmentFactory.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resources\6661626271666.jpg" />
     <Resource Include="Resources\4099898111666.jpg" />
     <Resource Include="Resources\4022221441666.jpg" />
@@ -1183,6 +1173,17 @@
     <Resource Include="Resources\ПЦС-602-2621.jpg" />
     <Resource Include="Resources\ПЦС-643-2519.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="garmentFactory.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>garmentFactory.edmx</DependentUpon>
+      <LastGenOutput>garmentFactory.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="garmentFactory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>garmentFactory.edmx</DependentUpon>
+      <LastGenOutput>garmentFactory.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

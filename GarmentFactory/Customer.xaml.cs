@@ -19,9 +19,12 @@ namespace GarmentFactory
     /// </summary>
     public partial class Customer : Window
     {
-        public Customer()
+        public User _user;
+        public int costs = 0;
+        public Customer(User user)
         {
             InitializeComponent();
+            _user = user;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -57,40 +60,95 @@ namespace GarmentFactory
 
         private void menuMakeOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void btnMakeOrder_Click(object sender, RoutedEventArgs e)
         {
-            if(cmbProduct1.Text != "Изделие" && cmbProduct2.Text != "Изделие" && cmbProduct3.Text != "Изделие")
+            try
             {
-                int num;
-                int sum = 0;
-                if (int.TryParse(txtCost1.Text, out num) == true && int.TryParse(txtCount1.Text, out num) == true)
+                using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
                 {
-                    sum += int.Parse(txtCost1.Text) * int.Parse(txtCount1.Text);
-                }
-                if (int.TryParse(txtCost2.Text, out num) == true && int.TryParse(txtCount2.Text, out num) == true)
-                {
-                    sum += int.Parse(txtCost2.Text) * int.Parse(txtCount2.Text);
-                }
-                if (int.TryParse(txtCost2.Text, out num) == true && int.TryParse(txtCount3.Text, out num) == true)
-                {
-                    sum += int.Parse(txtCost3.Text) * int.Parse(txtCount3.Text);
-                }
+                    Order order = new Order() { Date = DateTime.Now, ExecutionStage = "Новый", IdCustomer = _user.Login, IdManager = "shh" };
+                    garmentFactoryEntities.Order.Add(order);
+                    garmentFactoryEntities.SaveChanges();
 
-                totalCost.Content = sum + " ₽";
+                    foreach (Product product in garmentFactoryEntities.Product)
+                    {
+                        if (cmbProduct1.Text == product.IdProduct + " " + product.Name)
+                        {
+                            CustomProducts custprod = new CustomProducts()
+                            {
+                                IdOrder = order.IdOrder,
+                                IdProduct = product.IdProduct,
+                                Count = txtCount1.Text
+                            };
+                            garmentFactoryEntities.CustomProducts.Add(custprod);
+                        }
+                        else if (cmbProduct2.Text == product.IdProduct + " " + product.Name)
+                        {
+                            CustomProducts custprod = new CustomProducts()
+                            {
+                                IdOrder = order.IdOrder,
+                                IdProduct = product.IdProduct,
+                                Count = txtCount2.Text
+                            };
+                            garmentFactoryEntities.CustomProducts.Add(custprod);
+                        }
+                        else if (cmbProduct3.Text == product.IdProduct + " " + product.Name)
+                        {
+                            CustomProducts custprod = new CustomProducts()
+                            {
+                                IdOrder = order.IdOrder,
+                                IdProduct = product.IdProduct,
+                                Count = txtCount3.Text
+                            };
+                            garmentFactoryEntities.CustomProducts.Add(custprod);
+                        }
+                        else if (cmbProduct4.Text == product.IdProduct + " " + product.Name)
+                        {
+                            CustomProducts custprod = new CustomProducts()
+                            {
+                                IdOrder = order.IdOrder,
+                                IdProduct = product.IdProduct,
+                                Count = txtCount4.Text
+                            };
+                            garmentFactoryEntities.CustomProducts.Add(custprod);
+                        }
+                        else if (cmbProduct5.Text == product.IdProduct + " " + product.Name)
+                        {
+                            CustomProducts custprod = new CustomProducts()
+                            {
+                                IdOrder = order.IdOrder,
+                                IdProduct = product.IdProduct,
+                                Count = txtCount5.Text
+                            };
+                            garmentFactoryEntities.CustomProducts.Add(custprod);
+                        }
+                    }
+                    garmentFactoryEntities.SaveChanges();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Выберите пожалуйста изделие!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message);
             }
-            
         }
 
         private void txtCount1_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             txtCount1.Clear();
+        }
+
+        public double Cost(Product product, int count) // метод, который считает стоимость изделия
+        {
+            using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
+            {
+                string fabricId = garmentFactoryEntities.FabricProduct.FirstOrDefault(fb => fb.IdProduct == product.IdProduct).IdFabric;
+                string furnitureId = garmentFactoryEntities.FurnitureProduct.FirstOrDefault(fb => fb.IdProduct == product.IdProduct).IdFurniture;
+
+                return (garmentFactoryEntities.Fabric.FirstOrDefault(fb => fb.IdFabric == fabricId).Price + garmentFactoryEntities.Furniture.FirstOrDefault(fb => fb.IdFurniture == furnitureId).Price) * count;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -102,6 +160,138 @@ namespace GarmentFactory
                     cmbProduct1.Items.Add(product.IdProduct + " " + product.Name);
                     cmbProduct2.Items.Add(product.IdProduct + " " + product.Name);
                     cmbProduct3.Items.Add(product.IdProduct + " " + product.Name);
+                    cmbProduct4.Items.Add(product.IdProduct + " " + product.Name);
+                    cmbProduct5.Items.Add(product.IdProduct + " " + product.Name);
+                    cmbProduct6.Items.Add(product.IdProduct + " " + product.Name);
+                    cmbProduct7.Items.Add(product.IdProduct + " " + product.Name);
+                    cmbProduct8.Items.Add(product.IdProduct + " " + product.Name);
+                    cmbProduct9.Items.Add(product.IdProduct + " " + product.Name);
+                    cmbProduct10.Items.Add(product.IdProduct + " " + product.Name);
+                }
+            }
+        }
+
+        private void txtCount1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
+            {
+                foreach (Product product in garmentFactoryEntities.Product)
+                {
+                    if (txtCount1.Text != "Количество" && txtCount1.Text != string.Empty)
+                    {
+                        if (cmbProduct1.Text == product.IdProduct + " " + product.Name)
+                        {
+                            txtCost1.Text = Cost(product, int.Parse(txtCount1.Text)).ToString();
+                            totalcosts += int.Parse(txtCost3.Text);
+                            totalCost.Content = totalcosts + " ₽";
+                        }  
+                    }
+                    if (txtCount1.Text == string.Empty)
+                        txtCost1.Clear();
+                }
+            }
+        }
+
+        private void txtCount2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
+            {
+                foreach (Product product in garmentFactoryEntities.Product)
+                {
+                    if (txtCount2.Text != "Количество" && txtCount2.Text != string.Empty)
+                    {
+                        if (cmbProduct2.Text == product.IdProduct + " " + product.Name)
+                        {
+                            txtCost2.Text = Cost(product, int.Parse(txtCount2.Text)).ToString();
+                            totalcosts += int.Parse(txtCost3.Text);
+                            totalCost.Content = totalcosts + " ₽";
+                        }
+                    }
+                    if (txtCount2.Text == string.Empty)
+                        txtCost2.Clear();
+                }
+            }
+        }
+
+        private void txtCount2_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtCount2.Clear();
+        }
+
+        private void txtCount3_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtCount3.Clear();
+        }
+
+        private void txtCount3_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
+            {
+                foreach (Product product in garmentFactoryEntities.Product)
+                {
+                    if (txtCount3.Text != "Количество" && txtCount3.Text != string.Empty)
+                    {
+                        if (cmbProduct3.Text == product.IdProduct + " " + product.Name)
+                        {
+                            txtCost3.Text = Cost(product, int.Parse(txtCount3.Text)).ToString();
+                            totalcosts += int.Parse(txtCost3.Text);
+                            totalCost.Content = totalcosts + " ₽";
+                        }  
+                    }
+                    if (txtCount3.Text == string.Empty)
+                        txtCost3.Clear();
+                }
+            }
+        }
+
+        private void txtCount5_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtCount5.Clear();
+        }
+
+        private void txtCount5_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
+            {
+                foreach (Product product in garmentFactoryEntities.Product)
+                {
+                    if (txtCount5.Text != "Количество" && txtCount5.Text != string.Empty)
+                    {
+                        if (cmbProduct5.Text == product.IdProduct + " " + product.Name)
+                        { 
+                            txtCost5.Text = Cost(product, int.Parse(txtCount5.Text)).ToString();
+                            totalcosts += int.Parse(txtCost5.Text);
+                            totalCost.Content = totalcosts + " ₽";
+                        }    
+                    }
+                    if (txtCount5.Text == string.Empty)
+                        txtCost5.Clear();
+                }
+            }
+        }
+
+        private void txtCount4_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtCount4.Clear();
+        }
+
+        private void txtCount4_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            using (GarmentFactoryEntities garmentFactoryEntities = new GarmentFactoryEntities())
+            {
+                foreach (Product product in garmentFactoryEntities.Product)
+                {
+                    if (txtCount4.Text != "Количество" && txtCount4.Text != string.Empty)
+                    {
+                        if (cmbProduct4.Text == product.IdProduct + " " + product.Name)
+                        {
+                            txtCost4.Text = Cost(product, int.Parse(txtCount4.Text)).ToString();
+                            totalcosts += int.Parse(txtCost4.Text);
+                            totalCost.Content = totalcosts + " ₽";
+                        }     
+                    }
+                    if (txtCount4.Text == string.Empty)
+                        txtCost4.Clear();
                 }
             }
         }

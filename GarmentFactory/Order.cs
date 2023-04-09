@@ -14,14 +14,20 @@ namespace GarmentFactory
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.CustomProducts = new HashSet<CustomProducts>();
+        }
+    
         public int IdOrder { get; set; }
         public System.DateTime Date { get; set; }
         public string ExecutionStage { get; set; }
         public string IdCustomer { get; set; }
         public string IdManager { get; set; }
     
-        public virtual CustomProducts CustomProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomProducts> CustomProducts { get; set; }
         public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
     }
 }

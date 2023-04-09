@@ -18,7 +18,6 @@ namespace GarmentFactory
         public User()
         {
             this.Order = new HashSet<Order>();
-            this.Order1 = new HashSet<Order>();
         }
     
         public string Login { get; set; }
@@ -27,7 +26,5 @@ namespace GarmentFactory
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order1 { get; set; }
     }
 }

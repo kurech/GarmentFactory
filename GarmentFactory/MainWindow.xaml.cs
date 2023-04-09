@@ -37,7 +37,7 @@ namespace GarmentFactory
                         { 
                             if (user.Role == "Заказчик")
                             {
-                                Customer customer = new Customer();
+                                Customer customer = new Customer(user);
                                 customer.Show();
                                 this.Hide();
                             }

@@ -15,34 +15,89 @@
                 <MenuItem Header="_Выйти" Margin="10 5" x:Name="menuOut" Click="menuOut_Click">
                 </MenuItem>
             </Menu>
-            <StackPanel x:Name="firstProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 40 0 0" HorizontalAlignment="Center">
-                <ComboBox x:Name="cmbProduct1" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
-                    <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
-                </ComboBox>
-                <TextBox x:Name="txtCount1" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0" PreviewMouseDown="txtCount1_PreviewMouseDown">Количество</TextBox>
-                <TextBox x:Name="txtCost1" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
-            </StackPanel>
-            <StackPanel x:Name="secondProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
-                <ComboBox x:Name="cmbProduct2" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
-                    <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
-                </ComboBox>
-                <TextBox x:Name="txtCount2" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0">Количество</TextBox>
-                <TextBox x:Name="txtCost2" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
-            </StackPanel>
-            <StackPanel x:Name="thirdProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
-                <ComboBox x:Name="cmbProduct3" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
-                    <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
-                </ComboBox>
-                <TextBox x:Name="txtCount3" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0">Количество</TextBox>
-                <TextBox x:Name="txtCost3" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
-            </StackPanel>
-            <Label DockPanel.Dock="Top" x:Name="lblAddProduct" PreviewMouseDown="lblAddProduct_PreviewMouseDown" FontSize="36" Margin="20 -140" Width="35" HorizontalAlignment="Center">+</Label>
-            <Label DockPanel.Dock="Top" x:Name="line" FontSize="36" Margin="20 0 20 0" HorizontalAlignment="Center">________________________________________________________________________________________________________</Label>
-            <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Orientation="Horizontal" >
-                <Label DockPanel.Dock="Right" FontSize="16" FontWeight="Bold" FontStyle="Italic">Итоговая стоимость:</Label>
-                <Label DockPanel.Dock="Right" x:Name="totalCost" FontSize="16" FontWeight="Bold" FontStyle="Italic" Margin="30 0 0 0" Content="0 ₽"></Label>
-            </StackPanel>
-            <Button DockPanel.Dock="Top" x:Name="btnMakeOrder" Style="{StaticResource ResourceKey=redButton}" Click="btnMakeOrder_Click" Width="150" Height="50" Content="Оформить" Margin="20"></Button>
+            <DockPanel x:Name="dpMakeOrder" DockPanel.Dock="Top" Visibility="Visible" IsEnabled="True" >
+                <ScrollViewer CanContentScroll="True" DockPanel.Dock="Top" Height="200">
+                    <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                        <StackPanel x:Name="firstProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 40 0 0" HorizontalAlignment="Center">
+                            <ComboBox x:Name="cmbProduct1" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount1" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0" PreviewMouseDown="txtCount1_PreviewMouseDown" TextChanged="txtCount1_TextChanged">Количество</TextBox>
+                            <TextBox x:Name="txtCost1" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <StackPanel x:Name="secondProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden" >
+                            <ComboBox x:Name="cmbProduct2" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount2" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0" PreviewMouseDown="txtCount2_PreviewMouseDown" TextChanged="txtCount2_TextChanged">Количество</TextBox>
+                            <TextBox x:Name="txtCost2" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <StackPanel x:Name="thirdProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                            <ComboBox x:Name="cmbProduct3" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount3" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0" PreviewMouseDown="txtCount3_PreviewMouseDown" TextChanged="txtCount3_TextChanged">Количество</TextBox>
+                            <TextBox x:Name="txtCost3" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <StackPanel x:Name="fourthProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                            <ComboBox x:Name="cmbProduct4" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount4" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0" PreviewMouseDown="txtCount4_PreviewMouseDown" TextChanged="txtCount4_TextChanged">Количество</TextBox>
+                            <TextBox x:Name="txtCost4" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <StackPanel x:Name="fifthProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                            <ComboBox x:Name="cmbProduct5" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount5" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0" PreviewMouseDown="txtCount5_PreviewMouseDown" TextChanged="txtCount5_TextChanged">Количество</TextBox>
+                            <TextBox x:Name="txtCost5" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <StackPanel x:Name="sixthProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                            <ComboBox x:Name="cmbProduct6" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount6" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0">Количество</TextBox>
+                            <TextBox x:Name="txtCost6" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <StackPanel x:Name="seventhProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                            <ComboBox x:Name="cmbProduct7" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount7" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0">Количество</TextBox>
+                            <TextBox x:Name="txtCost7" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <StackPanel x:Name="eighthProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                            <ComboBox x:Name="cmbProduct8" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount8" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0">Количество</TextBox>
+                            <TextBox x:Name="txtCost8" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <StackPanel x:Name="ninethProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                            <ComboBox x:Name="cmbProduct9" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount9" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0">Количество</TextBox>
+                            <TextBox x:Name="txtCost9" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <StackPanel x:Name="tenthProduct" Orientation="Horizontal" DockPanel.Dock="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="Hidden">
+                            <ComboBox x:Name="cmbProduct10" Background="#FFB5D5CA" Width="250" Height="50" FontSize="16" Padding="12" FontWeight="Bold">
+                                <ComboBoxItem IsSelected="True" Margin="0 0 0 20">Изделие</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox x:Name="txtCount10" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="20 0">Количество</TextBox>
+                            <TextBox x:Name="txtCost10" Style="{StaticResource ResourceKey=greenTextbox}" Width="250" Height="50" Margin="0">Стоимость</TextBox>
+                        </StackPanel>
+                        <Label DockPanel.Dock="Top" x:Name="lblAddProduct" PreviewMouseDown="lblAddProduct_PreviewMouseDown" FontSize="36" Margin="20 -630" Width="35" HorizontalAlignment="Center">+</Label>
+                    </StackPanel>
+                </ScrollViewer>
+                <Label DockPanel.Dock="Top" x:Name="line" FontSize="36" Margin="20 50 20 0" HorizontalAlignment="Center">________________________________________________________________________________________________________</Label>
+                <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <Label DockPanel.Dock="Right" FontSize="16" FontWeight="Bold" FontStyle="Italic">Итоговая стоимость:</Label>
+                    <Label DockPanel.Dock="Right" x:Name="totalCost" FontSize="16" FontWeight="Bold" FontStyle="Italic" Margin="30 0 0 0" Content="0 ₽"></Label>
+                </StackPanel>
+                <Button DockPanel.Dock="Top" x:Name="btnMakeOrder" Style="{StaticResource ResourceKey=redButton}" Click="btnMakeOrder_Click" Width="150" Height="50" Content="Оформить" Margin="20"></Button>
+            </DockPanel>
         </DockPanel>
     </Grid>
 </Window>
